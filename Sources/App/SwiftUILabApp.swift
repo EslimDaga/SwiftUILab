@@ -8,7 +8,7 @@ struct SwiftUILabApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MoodCheckInView()
+            GalleryView()
         }
     }
 }

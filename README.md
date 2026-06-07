@@ -1,58 +1,93 @@
 # SwiftUI Lab
 
-Proyecto de Xcode (iOS 26+) que sirve como **catálogo para experimentar con
-distintos tipos de UI en SwiftUI**. Cada pantalla es una demo independiente
-accesible desde el menú principal.
+Un solo repo, **muchos proyectos**. Cada proyecto es la recreación en SwiftUI de un
+diseño de Dribbble. Todo vive dentro de una única app-galería: abres la app, ves el
+índice de recreaciones y entras a cualquiera con un toque.
 
-## Showcases incluidos
+> iOS 26 · Swift 6 · SwiftUI · generado con [XcodeGen](https://github.com/yonaskolb/XcodeGen)
 
-| Showcase | Qué demuestra |
-|----------|---------------|
-| **Liquid Glass** | `glassEffect` / `GlassEffectContainer` de iOS 26 con fallback a materiales |
-| **Layouts & Grids** | `LazyVGrid`, bento grid, carrusel horizontal, grid adaptativo |
-| **Formularios** | `Form`, validación con un servicio `@Observable` (`@MainActor`) |
-| **Animaciones** | springs, `matchedGeometryEffect`, transiciones, `phaseAnimator` |
-| **Listas Interactivas** | secciones, swipe actions, `onMove`, `onDelete`, `EditButton` |
-| **Gráficos** | Swift Charts: barras, línea + área, sectores |
+---
 
-## Buenas prácticas aplicadas
+## 📒 Índice de proyectos
 
-- Navegación con `NavigationStack` + `NavigationPath` (navegación programática).
-- Estado con `@Observable` + `@State` (en lugar de `ObservableObject`/`@StateObject`).
-- Lógica de negocio fuera de las vistas, en servicios testeables.
-- Adopción de Liquid Glass con `#available(iOS 26, *)` y fallback.
-- Swift 6, agrupación de archivos por responsabilidad.
+| # | Proyecto | Diseño | Estado | Añadido |
+|---|----------|--------|--------|---------|
+| 1 | [Mood Check-In](Sources/Projects/MoodCheckIn) | Onboarding de bienestar (self-care) | ✅ Listo | Jun 2026 |
 
-## Estructura
+> Cada fila apunta a la carpeta del proyecto dentro de `Sources/Projects/`.
+
+### 🧩 Showcases generales
+
+Demos reutilizables de SwiftUI, **compartidos entre todos los proyectos** (no se
+duplican por proyecto). Accesibles desde la galería:
+
+`Animations` · `Lists` · `Charts` · `Forms` · `Layouts` · `Liquid Glass`
+
+Viven en [`Sources/Showcases/`](Sources/Showcases).
+
+---
+
+## 🗂 Estructura del repo
 
 ```
 SwiftUILab/
-├── project.yml              # Especificación de XcodeGen
-├── Sources/
-│   ├── App/                 # Punto de entrada + menú principal
-│   ├── Components/          # Componentes reutilizables (glass, fondo)
-│   └── Showcases/           # Una pantalla por tipo de UI
-└── Resources/
-    └── Assets.xcassets      # AccentColor, AppIcon
+├── project.yml              # Spec de XcodeGen (el .xcodeproj se regenera)
+├── README.md                # Este índice
+├── Resources/               # Assets + fuentes (Poppins) compartidos
+└── Sources/
+    ├── App/
+    │   ├── SwiftUILabApp.swift   # @main → GalleryView
+    │   ├── GalleryView.swift     # Pantalla índice (galería de proyectos)
+    │   ├── LabCatalog.swift      # Registro: añade un proyecto aquí
+    │   └── AppFont.swift         # Tipografía Poppins
+    ├── Projects/            # 👈 Una carpeta por recreación de Dribbble
+    │   └── MoodCheckIn/
+    ├── Showcases/           # Demos generales reutilizables
+    └── Components/          # Componentes compartidos
 ```
 
-## Regenerar / abrir
+---
 
-El proyecto `.xcodeproj` se genera con [XcodeGen](https://github.com/yonaskolb/XcodeGen):
+## ▶️ Cómo correr
 
 ```bash
-xcodegen generate      # regenera SwiftUILab.xcodeproj desde project.yml
+# 1. Genera el proyecto Xcode (no está versionado; se regenera desde project.yml)
+xcodegen generate
+
+# 2. Ábrelo
 open SwiftUILab.xcodeproj
 ```
 
-> Añade nuevos `.swift` dentro de `Sources/` y vuelve a ejecutar `xcodegen generate`.
+O compila desde la terminal:
 
-## Créditos / Inspiración
+```bash
+xcodebuild -project SwiftUILab.xcodeproj -scheme SwiftUILab \
+  -destination 'generic/platform=iOS Simulator' build
+```
 
-Este proyecto es un **challenge de práctica**: una recreación en SwiftUI inspirada
-en el concepto _"Self-care Mobile App Design Concept"_ publicado en Dribbble.
+---
 
-- Inspiración: <https://dribbble.com/shots/23278774-Self-care-Mobile-App-Design-Concept>
-- Diseño original por **RonasIT**: <https://dribbble.com/ronasit>
+## ➕ Cómo añadir un proyecto nuevo
 
-Todo el crédito del diseño visual es de sus autores originales.
+1. Crea la carpeta `Sources/Projects/<NombreProyecto>/` con tus vistas SwiftUI.
+2. Añade **una** entrada a `LabCatalog.projects` en
+   [`Sources/App/LabCatalog.swift`](Sources/App/LabCatalog.swift):
+
+   ```swift
+   LabProject(
+       id: "nombre-proyecto",
+       title: "Título",
+       designer: "Crédito del shot de Dribbble",
+       summary: "Descripción corta.",
+       accent: .blue,
+       symbol: "sparkles",          // SF Symbol
+       added: "Jul 2026",
+       destination: { AnyView(MiVistaPrincipal()) }
+   )
+   ```
+
+3. Corre `xcodegen generate` (XcodeGen toma los archivos automáticamente).
+4. Agrega la fila correspondiente a la tabla del índice de arriba. ✨
+
+La galería y la navegación se actualizan solas a partir del catálogo — no hace falta
+tocar `GalleryView`.
