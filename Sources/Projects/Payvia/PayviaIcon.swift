@@ -1,8 +1,5 @@
 import SwiftUI
 
-/// Minimal wrapper around the Iconoir (https://iconoir.com) stroke icon set.
-/// Each case maps to a template-rendering vector imageset in Assets.xcassets
-/// named `ico-<rawValue>`, so the icon inherits the current `foregroundStyle`.
 enum Iconoir: String {
     case search
     case bell
@@ -43,13 +40,9 @@ struct IconoirView: View {
     }
 }
 
-/// Avatar backed by the DiceBear "adventurer-neutral" illustrated face set
-/// (https://dicebear.com). Loads the PNG endpoint via AsyncImage; the same
-/// `seed` always yields the same face.
 struct DiceBearAvatar: View {
     let seed: String
     var size: CGFloat = 52
-    /// Defaults to a full circle; pass a smaller value for a rounded square.
     var cornerRadius: CGFloat? = nil
 
     private var url: URL? {

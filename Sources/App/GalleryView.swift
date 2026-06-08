@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 struct GalleryView: View {
     private let columns = [GridItem(.adaptive(minimum: 150), spacing: 16)]
 

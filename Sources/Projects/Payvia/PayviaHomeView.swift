@@ -24,14 +24,13 @@ struct PayviaHomeView: View {
 
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 0) {
-                        
+
                         Color.clear
                             .frame(height: 0)
                             .onGeometryChange(for: CGFloat.self) {
                                 $0.frame(in: .named("scroll")).minY
                             } action: { scrollY = -$0 }
 
-                        
                         header
                             .padding(.horizontal, 22)
                             .padding(.top, 8)
@@ -47,20 +46,15 @@ struct PayviaHomeView: View {
                 }
                 .coordinateSpace(name: "scroll")
             }
-            // Pinned at the bottom without spanning (and intercepting) the
-            // whole screen, so header/sheet controls above stay tappable.
             .overlay(alignment: .bottom) { tabBar }
         }
         .preferredColorScheme(.dark)
     }
 
-    /// 0 when at rest, 1 once the sheet has risen far enough to fully cover the header.
     private var coverProgress: CGFloat {
         guard headerHeight > 0 else { return 0 }
         return min(max(scrollY, 0) / headerHeight, 1)
     }
-
-    // MARK: Header (over the gradient)
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -174,7 +168,6 @@ struct PayviaHomeView: View {
         }
         .buttonStyle(.plain)
     }
-
 
     private var sheet: some View {
         VStack(spacing: 24) {
@@ -319,8 +312,6 @@ struct PayviaHomeView: View {
         }
     }
 
-    // MARK: Tab bar
-
     private var tabBar: some View {
         ZStack {
             HStack {
@@ -375,18 +366,14 @@ struct PayviaHomeView: View {
     }
 }
 
-/// Vertical navy→cobalt→ice-blue gradient with a fine film grain blended in
-/// `softLight`, ported from the reference CSS:
-/// `linear-gradient(180deg, #05091E 0%, #1A42E6 70%, #D0F4FF 100%)`
-/// plus a fractal-noise overlay (`background-blend-mode: soft-light`).
 struct PayviaHeaderBackground: View {
     var body: some View {
         ZStack {
             LinearGradient(
                 stops: [
-                    .init(color: Color(red: 0.0196, green: 0.0353, blue: 0.1176), location: 0.0),  // #05091E
-                    .init(color: Color(red: 0.1020, green: 0.2588, blue: 0.9020), location: 0.70),  // #1A42E6
-                    .init(color: Color(red: 0.8157, green: 0.9569, blue: 1.0000), location: 1.0),   // #D0F4FF
+                    .init(color: Color(red: 0.0196, green: 0.0353, blue: 0.1176), location: 0.0),
+                    .init(color: Color(red: 0.1020, green: 0.2588, blue: 0.9020), location: 0.70),
+                    .init(color: Color(red: 0.8157, green: 0.9569, blue: 1.0000), location: 1.0),
                 ],
                 startPoint: .top,
                 endPoint: .bottom
@@ -402,16 +389,12 @@ struct PayviaHeaderBackground: View {
     }
 }
 
-/// A small tileable monochrome white-noise texture, generated once. Tiled and
-/// blended with `softLight` it reads as a subtle, even film grain over the
-/// gradient (pure white noise tiles seamlessly — no visible repetition).
 enum PayviaNoise {
     static let image: Image = {
         let dim = 160
         let bytesPerRow = dim * 4
         var pixels = [UInt8](repeating: 0, count: dim * dim * 4)
 
-        // Deterministic xorshift64 so the grain is stable across launches/previews.
         var seed: UInt64 = 0x9E3779B97F4A7C15
         func nextByte() -> UInt8 {
             seed ^= seed << 13
@@ -442,7 +425,7 @@ enum PayviaNoise {
         if let cg {
             return Image(decorative: cg, scale: 1, orientation: .up)
         }
-        return Image(systemName: "square")  // unreachable fallback
+        return Image(systemName: "square")
     }()
 }
 
