@@ -12,8 +12,9 @@ diseño de Dribbble. Todo vive dentro de una única app-galería: abres la app, 
 
 | # | Proyecto | Diseño | Estado | Añadido |
 |---|----------|--------|--------|---------|
-| 1 | [Payvia](Sources/Projects/Payvia) | Finance Mobile App (Behance) — splash + onboarding, tipografía Bricolage Grotesque | ✅ Listo | Jun 2026 |
-| 2 | [Mood Check-In](Sources/Projects/MoodCheckIn) | Onboarding de bienestar (self-care) | ✅ Listo | Jun 2026 |
+| 1 | [Craftyo](Sources/Projects/Craftyo) | [Craftyo — Flight Booking Mobile App](https://dribbble.com/shots/26848568-Craftyo-Flight-booking-mobile-app) (Dribbble) — home con buscador de vuelos, cupones y últimos viajes | ✅ Listo | Jun 2026 |
+| 2 | [Payvia](Sources/Projects/Payvia) | Finance Mobile App (Behance) — splash + onboarding, tipografía Bricolage Grotesque | ✅ Listo | Jun 2026 |
+| 3 | [Mood Check-In](Sources/Projects/MoodCheckIn) | Onboarding de bienestar (self-care) | ✅ Listo | Jun 2026 |
 
 > Cada fila apunta a la carpeta del proyecto dentro de `Sources/Projects/`.
 

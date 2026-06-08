@@ -27,6 +27,16 @@ enum LabRoute: Hashable {
 enum LabCatalog {
     static let projects: [LabProject] = [
         LabProject(
+            id: "craftyo",
+            title: "Craftyo",
+            designer: "Flight Booking Mobile App",
+            summary: "Home de una app de reserva de vuelos: buscador con segmented control, cupones tipo ticket y últimos viajes.",
+            accent: CraftyoTheme.navy,
+            symbol: "airplane",
+            added: "Jun 2026",
+            destination: { AnyView(CraftyoHomeView()) }
+        ),
+        LabProject(
             id: "payvia",
             title: "Payvia",
             designer: "Finance Mobile App",
