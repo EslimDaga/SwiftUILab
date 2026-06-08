@@ -7,6 +7,11 @@ enum AppFont {
         "Poppins-Medium",
         "Poppins-SemiBold",
         "Poppins-Bold",
+        "BricolageGrotesque-Regular",
+        "BricolageGrotesque-Medium",
+        "BricolageGrotesque-SemiBold",
+        "BricolageGrotesque-Bold",
+        "BricolageGrotesque-ExtraBold",
     ]
 
     static func register() {
@@ -24,6 +29,16 @@ enum AppFont {
         default: "Poppins-Regular"
         }
     }
+
+    static func bricolageName(for weight: Font.Weight) -> String {
+        switch weight {
+        case .black, .heavy: "BricolageGrotesque-24ptExtraBold"
+        case .bold: "BricolageGrotesque-24ptBold"
+        case .semibold: "BricolageGrotesque-24ptSemiBold"
+        case .medium: "BricolageGrotesque-24ptMedium"
+        default: "BricolageGrotesque-24pt"
+        }
+    }
 }
 
 extension Font {
@@ -33,5 +48,13 @@ extension Font {
         relativeTo style: Font.TextStyle = .body
     ) -> Font {
         .custom(AppFont.name(for: weight), size: size, relativeTo: style)
+    }
+
+    static func bricolage(
+        _ size: CGFloat,
+        weight: Font.Weight = .regular,
+        relativeTo style: Font.TextStyle = .body
+    ) -> Font {
+        .custom(AppFont.bricolageName(for: weight), size: size, relativeTo: style)
     }
 }

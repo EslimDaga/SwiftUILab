@@ -12,7 +12,8 @@ diseño de Dribbble. Todo vive dentro de una única app-galería: abres la app, 
 
 | # | Proyecto | Diseño | Estado | Añadido |
 |---|----------|--------|--------|---------|
-| 1 | [Mood Check-In](Sources/Projects/MoodCheckIn) | Onboarding de bienestar (self-care) | ✅ Listo | Jun 2026 |
+| 1 | [Payvia](Sources/Projects/Payvia) | Finance Mobile App (Behance) — splash + onboarding, tipografía Bricolage Grotesque | ✅ Listo | Jun 2026 |
+| 2 | [Mood Check-In](Sources/Projects/MoodCheckIn) | Onboarding de bienestar (self-care) | ✅ Listo | Jun 2026 |
 
 > Cada fila apunta a la carpeta del proyecto dentro de `Sources/Projects/`.
 
@@ -33,7 +34,7 @@ Viven en [`Sources/Showcases/`](Sources/Showcases).
 SwiftUILab/
 ├── project.yml              # Spec de XcodeGen (el .xcodeproj se regenera)
 ├── README.md                # Este índice
-├── Resources/               # Assets + fuentes (Poppins) compartidos
+├── Resources/               # Assets + fuentes (Poppins, Bricolage Grotesque) compartidos
 └── Sources/
     ├── App/
     │   ├── SwiftUILabApp.swift   # @main → GalleryView

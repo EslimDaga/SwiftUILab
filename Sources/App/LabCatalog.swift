@@ -27,6 +27,16 @@ enum LabRoute: Hashable {
 enum LabCatalog {
     static let projects: [LabProject] = [
         LabProject(
+            id: "payvia",
+            title: "Payvia",
+            designer: "Finance Mobile App",
+            summary: "Splash y onboarding de una fintech con tipografía Bricolage Grotesque y fondo azul eléctrico.",
+            accent: PayviaTheme.brand,
+            symbol: "creditcard.fill",
+            added: "Jun 2026",
+            destination: { AnyView(PayviaView()) }
+        ),
+        LabProject(
             id: "mood-check-in",
             title: "Mood Check-In",
             designer: "Self-care onboarding",
